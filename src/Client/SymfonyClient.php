@@ -53,6 +53,11 @@ class SymfonyClient extends AbstractClient implements ClientInterface
      * @param  string $command
      * @param  array  $query
      * @return ItemCollection
+     * @throws ClientExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
      */
     private function send(string $method, string $command, array $query = []) : ItemCollection
     {
@@ -63,10 +68,8 @@ class SymfonyClient extends AbstractClient implements ClientInterface
                 ]),
             ])
                 ->toArray();
-        } catch (ClientExceptionInterface | RedirectionExceptionInterface | DecodingExceptionInterface | ServerExceptionInterface | TransportExceptionInterface $e) {
-            $response = [
-                $e->getMessage(),
-            ];
+        } catch (ServerExceptionInterface $exception) {
+            $response = $exception->getResponse()->toArray(false);
         }
 
         return new ItemCollection($response);
