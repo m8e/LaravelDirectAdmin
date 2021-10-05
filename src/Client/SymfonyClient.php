@@ -63,7 +63,7 @@ class SymfonyClient extends AbstractClient
 
         return $this->send($method, $command, $query);
     }
-
+    
     /**
      * @param  string $method
      * @param  string $command
@@ -74,13 +74,9 @@ class SymfonyClient extends AbstractClient
     private function send(string $method, string $command, array $query = []) : ItemCollection
     {
         try {
-            $response = $this->client->request($method, $command, $query)->toArray();
-        } catch (ServerExceptionInterface $exception) {
-            $response = $exception->getResponse()->toArray(true);
-        } catch (ClientExceptionInterface | DecodingExceptionInterface | RedirectionExceptionInterface | TransportExceptionInterface $exception) {
+            return new ItemCollection($this->client->request($method, $command, $query)->toArray(false));
+        } catch (ClientExceptionInterface | DecodingExceptionInterface | RedirectionExceptionInterface | ServerExceptionInterface | TransportExceptionInterface $exception) {
             throw new DirectAdminException($exception->getMessage(), $exception->getCode());
         }
-
-        return new ItemCollection($response);
     }
 }
