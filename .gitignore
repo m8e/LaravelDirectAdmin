@@ -1,0 +1,11 @@
+# IDEA
+.idea
+
+# Vendor
+/vendor
+
+# Locked File
+composer.lock
+
+# PHP Unit
+.phpunit.result.cache

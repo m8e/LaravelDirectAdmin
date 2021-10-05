@@ -1,0 +1,51 @@
+{
+    "name": "octopyid/laravel-directadmin",
+    "description": "A DirectAdmin API Wrapper for Laravel",
+    "keywords": [
+        "php",
+        "laravel",
+        "directadmin"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Supian M",
+            "email": "supianidz@gmail.com"
+        },
+        {
+            "name": "Octopy ID",
+            "email": "hallo@octopy.id"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "laravel/framework": "^8.62",
+        "symfony/http-client": "^5.3"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^5|^6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Octopy\\DirectAdmin\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Octopy\\DirectAdmin\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Octopy\\DirectAdmin\\DirectAdminServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
