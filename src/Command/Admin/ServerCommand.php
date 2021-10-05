@@ -3,6 +3,7 @@
 namespace Octopy\DirectAdmin\Command\Admin;
 
 use Octopy\DirectAdmin\Command\AbstractCommand;
+use Octopy\DirectAdmin\Command\Admin\Collection\ServerItemCollection;
 use Octopy\DirectAdmin\Command\Admin\Contract\ServerCommandInterface;
 use Octopy\DirectAdmin\Context\ItemCollection;
 use Octopy\DirectAdmin\DirectAdminException;
@@ -13,6 +14,20 @@ class ServerCommand extends AbstractCommand implements ServerCommandInterface
      * @var bool
      */
     protected bool $dontAskPassword = false;
+
+    /**
+     * @param  bool $bytes
+     * @return ServerItemCollection
+     * @throws DirectAdminException
+     */
+    public function getSystemInfo(bool $bytes = true) : ServerItemCollection
+    {
+        return new ServerItemCollection(
+            $this->client->get('CMD_API_SYSTEM_INFO', [
+                'bytes' => $bytes ? 'yes' : 'no',
+            ])
+        );
+    }
 
     /**
      * @param  string|null $password
