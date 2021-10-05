@@ -4,8 +4,8 @@ namespace Octopy\DirectAdmin\Context;
 
 use Octopy\DirectAdmin\Command\Admin\Contract\ServiceCommandInterface;
 use Octopy\DirectAdmin\Command\Admin\ServiceCommand;
-use Octopy\DirectAdmin\Config\ServerConfig;
 use Octopy\DirectAdmin\Context\Contract\AdminContextInterface;
+use Octopy\DirectAdmin\Context\Contract\ContextInterface;
 
 class AdminContext extends AbstractContext implements AdminContextInterface
 {
@@ -18,10 +18,11 @@ class AdminContext extends AbstractContext implements AdminContextInterface
     }
 
     /**
-     * @return ServerConfig
+     * @param  string $server
+     * @return ContextInterface
      */
-    public function getConfig() : ServerConfig
+    public function server(string $server) : ContextInterface
     {
-        return $this->config;
+        return $this->app->server($server)->adminContext();
     }
 }

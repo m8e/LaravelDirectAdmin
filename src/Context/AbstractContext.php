@@ -3,27 +3,32 @@
 namespace Octopy\DirectAdmin\Context;
 
 use Illuminate\Support\Facades\App;
-use Octopy\DirectAdmin\Config\ServerConfig;
 use Octopy\DirectAdmin\Context\Contract\ContextInterface;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Octopy\DirectAdmin\DirectAdmin;
 
 abstract class AbstractContext implements ContextInterface
 {
-    protected HttpClientInterface $client;
-
     /**
-     * @param  ServerConfig $config
+     * @param  DirectAdmin $app
      */
-    public function __construct(public ServerConfig $config)
+    public function __construct(protected DirectAdmin $app)
     {
         //
+    }
+
+    /**
+     * @return DirectAdmin
+     */
+    public function getApp() : DirectAdmin
+    {
+        return $this->app;
     }
 
     /**
      * @param  string $command
      * @return mixed
      */
-    public function makeCommand(string $command) : mixed
+    protected function makeCommand(string $command) : mixed
     {
         return App::make($command, [
             'context' => $this,

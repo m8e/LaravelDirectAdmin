@@ -2,12 +2,11 @@
 
 namespace Octopy\DirectAdmin\Context\Contract;
 
-use Octopy\DirectAdmin\Config\ServerConfig;
-
 interface ContextInterface
 {
     /**
-     * @return ServerConfig
+     * @param  string $server
+     * @return ContextInterface
      */
-    public function getConfig() : ServerConfig;
+    public function server(string $server) : ContextInterface;
 }

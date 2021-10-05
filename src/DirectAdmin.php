@@ -31,6 +31,14 @@ class DirectAdmin
     }
 
     /**
+     * @return ServerConfig|string|null
+     */
+    public function getConfig() : ServerConfig|string|null
+    {
+        return $this->config;
+    }
+
+    /**
      * @param  ServerConfig|string $config
      * @return DirectAdmin
      */
@@ -47,7 +55,7 @@ class DirectAdmin
     {
         if (is_string($context)) {
             return App::make($context, [
-                'config' => $this->config,
+                'app' => $this,
             ]);
         }
 

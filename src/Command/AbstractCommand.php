@@ -19,8 +19,8 @@ abstract class AbstractCommand
     public function __construct(protected ContextInterface $context)
     {
         $this->client = new SymfonyClient([
-            'base_uri'   => $this->context->getConfig()->getConnection(),
-            'auth_basic' => $this->context->getConfig()->getCredential(),
+            'base_uri'   => $this->context->getApp()->getConfig()->getConnection(),
+            'auth_basic' => $this->context->getApp()->getConfig()->getCredential(),
         ]);
     }
 }
