@@ -2,10 +2,11 @@
 
 namespace Octopy\DirectAdmin\Command\Admin;
 
+use Octopy\DirectAdmin\Command\AbstractCommand;
 use Octopy\DirectAdmin\Context\Contract\ContextInterface;
 use Octopy\DirectAdmin\Context\ItemCollection;
 
-class ServiceActionCommand extends \Octopy\DirectAdmin\Command\AbstractCommand
+class ServiceActionCommand extends AbstractCommand implements Contract\ServiceActionCommandInterface
 {
     /**
      * @param  ContextInterface $context
@@ -14,6 +15,23 @@ class ServiceActionCommand extends \Octopy\DirectAdmin\Command\AbstractCommand
     public function __construct(ContextInterface $context, protected string $service)
     {
         parent::__construct($context);
+    }
+
+    /**
+     * @return ItemCollection
+     */
+    public function getSupportedAction() : ItemCollection
+    {
+        return new ItemCollection($this->context->serviceCommand()->getSupportedActions()->get($this->service));
+    }
+
+    /**
+     * @param  string $action
+     * @return bool
+     */
+    public function hasAction(string $action) : bool
+    {
+        return in_array($action, $this->getSupportedAction()->toArray());
     }
 
     /**

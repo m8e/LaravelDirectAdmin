@@ -16,6 +16,11 @@ interface ServiceCommandInterface
     /**
      * @return ItemCollection
      */
+    public function getSupportedActions() : ItemCollection;
+
+    /**
+     * @return ItemCollection
+     */
     public function getStatus() : ItemCollection;
 
     /**

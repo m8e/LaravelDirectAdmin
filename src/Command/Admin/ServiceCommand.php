@@ -20,6 +20,14 @@ class ServiceCommand extends AbstractCommand implements ServiceCommandInterface
     /**
      * @return ItemCollection
      */
+    public function getSupportedActions() : ItemCollection
+    {
+        return new ItemCollection($this->getServices()->get('actions'));
+    }
+
+    /**
+     * @return ItemCollection
+     */
     public function getStatus() : ItemCollection
     {
         return new ItemCollection($this->getServices()->get('status'));
